@@ -1,5 +1,5 @@
 {
-	"name": "swipestripe/swipestripe",
+	"name": "milessummers/swipestripe",
 	"description": "Ecommerce module to create online shops using SilverStripe.",
 	"homepage": "http://swipestripe.com",
 	"license": "BSD-3-Clause",
@@ -10,26 +10,16 @@
 			"name": "Frank Mullenger",
 			"email": "frankmullenger@gmail.com"
 		}
+		{
+			"name": "Miles Summers",
+			"email": "miles@youngearth.com.au"
+		}
 	],
 	"require":
 	{
 		"silverstripe/framework": "~3.1",
 		"silverstripe/cms": "~3.1",
 		"silverstripe/payment": "1.0.*"
-	},
-	"require-dev": 
-	{
-		"silverstripe/sqlite3": "*"
-	},
-	"suggest": {
-		"frankmullenger/payment-cheque": "Simple payment method for testing"
-	},
-	"support": 
-	{
-		"email": "info@swipestripe.com",
-		"irc": "irc://irc.freenode.org/silverstripe",
-		"forum": "http://www.silverstripe.org/e-commerce-modules/",
-		"issues": "https://github.com/swipestripe/silverstripe-swipestripe/issues"
 	},
 	"repositories": [
 		{

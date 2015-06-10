@@ -318,11 +318,28 @@ class OrderForm extends Form {
 			$shopConfig = ShopConfig::current_shop_config();
 			$precision = $shopConfig->BaseCurrencyPrecision;
 
+
+			// A Hack to allow swipestripe-addresses shipping info to be used in payment-paypal
 			$paymentData = array(
 				'Amount' => number_format($order->Total()->getAmount(), $precision, '.', ''),
 				'Currency' => $order->Total()->getCurrency(),
-				'Reference' => $order->ID
+				'Reference' => $order->ID,
+				'Notes' => $data['Notes'],
+				'Email' => $member->Email,
 			);
+			
+			if($order->hasExtension('Addresses_Order')) {
+				$paymentData['Shipping'] = array(
+					'PAYMENTREQUEST_0_SHIPTONAME' => $order->ShippingFirstName . ' ' . $order->ShippingSurname,
+					'PAYMENTREQUEST_0_SHIPTOSTREET' => $order->ShippingAddress,
+					'PAYMENTREQUEST_0_SHIPTOSTREET2' => $order->ShippingAddressLine2,
+					'PAYMENTREQUEST_0_SHIPTOCITY' => $order->ShippingCity,
+					'PAYMENTREQUEST_0_SHIPTOSTATE' => $order->ShippingState,
+					'PAYMENTREQUEST_0_SHIPTOZIP' => $order->ShippingPostalCode,
+					'PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE' => $order->ShippingCountryCode
+				);
+			}
+			
 			$paymentProcessor->payment->OrderID = $order->ID;
 			$paymentProcessor->payment->PaidByID = $member->ID;
 
